@@ -22,7 +22,7 @@ https://meganseiberthughes567991.invisionapp.com/freehand/lab6-HcQpIGTi9?dsid_h=
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-Name of feature: city-explorer
+Name of feature: city-explorer lab-06
 
 Estimate of time needed to complete: five hours
 
