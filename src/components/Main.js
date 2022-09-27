@@ -1,8 +1,8 @@
 import React from "react";
 import axios from 'axios';
-import './App.css';
-import CityCard from "./components/CityCard";
-import CityForm from "./components/CityForm";
+import '../App.css';
+import CityCard from "../components/CityCard";
+import CityForm from "../components/CityForm";
 
 
 class Main extends React.Component {
@@ -24,7 +24,8 @@ class Main extends React.Component {
   }
 
   handleSearch = async (e) => {
-  
+    console.log(this.state.searchQuery);
+
     e.preventDefault();
     this.setState({ error: false });
     try {
@@ -36,7 +37,6 @@ class Main extends React.Component {
         cityMap: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=12`,
         displayCard: true,
       });
-      this.setState({ searchQuery: '', });
       
       //Error caught here
      } catch (error) {
@@ -47,7 +47,7 @@ class Main extends React.Component {
       });
       this.setState({ errorMessage: error.message });
     }
-    e.target.reset();
+    // e.target.reset();
   }
 
   render() {
@@ -61,6 +61,7 @@ class Main extends React.Component {
           error={this.state.error}
         />
         <CityCard 
+          displayCard ={this.state.displayCard}
           location={this.state.location}
           cityMap={this.state.cityMap}
           errorMessage={this.state.errorMessage}
