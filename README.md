@@ -1,7 +1,7 @@
 # Project Name
 
 **Author**: Megan Seibert-Hughes
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.0 
 
 ![alt](https://github.com/cianedanan/city-explorer/blob/main/src/img/flow.png)
 
