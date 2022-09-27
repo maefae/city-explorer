@@ -21,3 +21,13 @@ https://meganseiberthughes567991.invisionapp.com/freehand/lab6-HcQpIGTi9?dsid_h=
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+Name of feature: city-explorer
+
+Estimate of time needed to complete: five hours
+
+Start time: 4:00 PM
+
+Finish time: 9:00 PM
+
+Actual time needed to complete: seven hours
