@@ -1,50 +1,73 @@
 import React from "react";
-// NEW
 import axios from 'axios';
+import './App.css';
+import CityCard from "./components/CityCard";
+import CityForm from "./components/CityForm";
+
 
 class Main extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      searchQuery:'',
+    this.state = {
+      searchQuery: '',
       location: {},
       error: false,
+      displayCard: false,
       errorMessage: '',
-    }
+      cityMap: ''
+    };
   }
 
-  getLocation = async (e) => {
+  handleInput = (e) => {
+    this.setState({ searchQuery: e.target.value });
+    console.log(this.state.searchQuery);
+  }
+
+  handleSearch = async (e) => {
+  
     e.preventDefault();
+    this.setState({ error: false });
     try {
       const API = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.searchQuery}&format=json`;
-      const res = await axios.get(API);
-      console.log(res.data[0])
-      this.setState({ location:res.data[0] });
-    } catch (error) {
-      console.log(error)
-      this.setState({ error: true });
+      const response = await axios.get(API);
+      // console.log(response.data[0]);
+      this.setState({ 
+        location: response.data[0],
+        cityMap: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=12`,
+        displayCard: true,
+      });
+      this.setState({ searchQuery: '', });
+      
+      //Error caught here
+     } catch (error) {
+      // console.log(error)
+      this.setState({ 
+        error: true,
+        displayCard: false,
+      });
       this.setState({ errorMessage: error.message });
     }
-
+    e.target.reset();
   }
 
   render() {
-    return(
+    return (
       <>
-        <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="search for a city"></input>
-        <button onClick={this.getLocation}>Explore!</button>
-        {this.state.location.place_id && 
-          <>
-            <h2>The city is: {this.state.location.display_name}</h2>
-            <h2>The lat is: {this.state.location.lat}</h2>
-            <h2>The lon is: {this.state.location.lon}</h2>
-          </>
-        }
-        {this.state.error && 
-          <h2>Oh no! {this.state.errorMessage}</h2>
-        }
+        <CityForm
+          handleInput={this.handleInput}
+          handleSearch={this.handleSearch}
+          location={this.state.location}
+          errorMessage={this.state.errorMessage}
+          error={this.state.error}
+        />
+        <CityCard 
+          location={this.state.location}
+          cityMap={this.state.cityMap}
+          errorMessage={this.state.errorMessage}
+          error={this.state.error}
+        />
       </>
-    )
+    );
   }
 }
 
