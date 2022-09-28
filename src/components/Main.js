@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../App.css';
 import CityCard from "../components/CityCard";
 import CityForm from "../components/CityForm";
-import Weather from './components/Weather';
+import Weather from '../components/Weather';
 
 
 class Main extends React.Component {
@@ -16,8 +16,8 @@ class Main extends React.Component {
       displayCard: false,
       errorMessage: '',
       cityMap: ''
-      weatherData: [],
-      displayWeather: false,
+      // weatherData: [],
+      // displayWeather: false,
     };
   }
 
