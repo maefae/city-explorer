@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../App.css';
 import CityCard from "../components/CityCard";
 import CityForm from "../components/CityForm";
+import Weather from './components/Weather';
 
 
 class Main extends React.Component {
@@ -15,6 +16,8 @@ class Main extends React.Component {
       displayCard: false,
       errorMessage: '',
       cityMap: ''
+      weatherData: [],
+      displayWeather: false,
     };
   }
 
@@ -36,6 +39,7 @@ class Main extends React.Component {
         location: response.data[0],
         cityMap: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=12`,
         displayCard: true,
+        searchQuery: '',
       });
       
       //Error caught here
@@ -47,8 +51,23 @@ class Main extends React.Component {
       });
       this.setState({ errorMessage: error.message });
     }
-    // e.target.reset();
   }
+
+  handleWeather = async (e) => {
+    try {
+      e.preventDefault();
+      const API = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
+      const response = await axios.get(API);
+      this.setState({ 
+        weatherData: response.data,
+        displayWeather: true, 
+      });
+      console.log(this.state.weatherData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   render() {
     return (
@@ -59,6 +78,7 @@ class Main extends React.Component {
           location={this.state.location}
           errorMessage={this.state.errorMessage}
           error={this.state.error}
+          searchQuery={this.state.searchQuery}
         />
         <CityCard 
           displayCard ={this.state.displayCard}
@@ -66,6 +86,11 @@ class Main extends React.Component {
           cityMap={this.state.cityMap}
           errorMessage={this.state.errorMessage}
           error={this.state.error}
+        />
+   <Weather
+          handleWeather={this.handleWeather}
+          weatherData={this.state.weatherData}
+          displayWeather={this.state.displayWeather}
         />
       </>
     );

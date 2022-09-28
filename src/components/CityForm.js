@@ -11,7 +11,7 @@ class CityForm extends React.Component {
         <Container className="mw-75">
           <Form onSubmit={this.props.handleSearch} className="my-3">
             <Form.Group className="mb-3">
-              <Form.Control onChange={this.props.handleInput} type="text" placeholder="Enter a city name to see its location on a map:" />
+            <Form.Control onChange={this.props.handleInput} value={this.props.searchQuery} type="text" placeholder="Enter a city name to see its location on a map:" />
             <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
             <div className="d-grid gap-2">

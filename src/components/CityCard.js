@@ -25,8 +25,8 @@ class CityCard extends React.Component {
             <Card.Body>
               <Card.Title>{this.props.location.display_name}</Card.Title>
               <Card.Text>
-                {this.props.location.lat} <br />
-                {this.props.location.lon}
+              Latitude: {this.props.location.lat} <br />
+                Longitude: {this.props.location.lon}
               </Card.Text>
             <Card.Img variant="top" src={this.props.cityMap} />
             </Card.Body>
