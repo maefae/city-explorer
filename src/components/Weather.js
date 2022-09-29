@@ -19,7 +19,6 @@ class Weather extends React.Component {
               )
             })}
           </div>
-          //map over this.props.weatherData and create a component in main render main component.
         </Container>
         }
       </>
