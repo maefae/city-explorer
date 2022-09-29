@@ -15,9 +15,8 @@ class Main extends React.Component {
       error: false,
       displayCard: false,
       errorMessage: '',
-      cityMap: ''
-      // weatherData: [],
-      // displayWeather: false,
+      cityMap: '',
+      weatherData: [],
     };
   }
 
@@ -41,7 +40,8 @@ class Main extends React.Component {
         displayCard: true,
         searchQuery: '',
       });
-      
+      this.handleWeather();
+
       //Error caught here
      } catch (error) {
       // console.log(error)
@@ -51,23 +51,25 @@ class Main extends React.Component {
       });
       this.setState({ errorMessage: error.message });
     }
+    this.handleWeather();
   }
 
-  handleWeather = async (e) => {
+  handleWeather = async () => {
     try {
-      e.preventDefault();
+     
       const API = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
-      const response = await axios.get(API);
+      const weatherRes = await axios.get(API);
       this.setState({ 
-        weatherData: response.data,
+        weatherData: weatherRes.data,
         displayWeather: true, 
       });
-      console.log(this.state.weatherData);
+      // console.log(this.state.weatherData);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   }
-
+ 
 
   render() {
     return (
@@ -88,7 +90,6 @@ class Main extends React.Component {
           error={this.state.error}
         />
    <Weather
-          handleWeather={this.handleWeather}
           weatherData={this.state.weatherData}
           displayWeather={this.state.displayWeather}
         />
