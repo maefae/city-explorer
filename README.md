@@ -3,7 +3,8 @@
 **Author**: Megan Seibert-Hughes
 **Version**: 1.0.0 
 
-![alt](https://github.com/cianedanan/city-explorer/blob/main/src/img/flow.png)
+![alt](public/flow.png)
+![alt](public/Untitled-2022-09-26-1402.png)
 
 ## Overview
 Let's the client search for a city name in the search bar and after clicking "explore now", the site displays the name and coordinates of the searched location and an image which depicts a map of the location. Error codes are displayed to the corresponding error.

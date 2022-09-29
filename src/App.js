@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
-import Mainphotos from './Mainphotos'; //new
+import Mainphotos from './Mainphotos'; 
 import './App.css';
 
 class App extends React.Component {
@@ -11,7 +11,7 @@ class App extends React.Component {
       <>
         <Header />
         <Main />
-        <Mainphotos /> //new
+        <Mainphotos /> 
         <Footer />
       </>
     );
