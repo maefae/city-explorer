@@ -8,9 +8,18 @@ class Weather extends React.Component {
       <>
         {this.props.displayWeather &&
         <Container>
-          <h5>Weather for {this.props.location.display_name}</h5>
-          <p>Forecast: {this.props.weatherData.weather.description}</p>
-          <p>Temperature: {this.props.weatherData.temp}</p>
+       <h3>Weather</h3>
+          <div>
+            {this.props.weatherData.map((e, i) => {
+              return (
+                <>
+                  <p key={i}>Date: {e.date}</p>
+                  <p>Forecast: {e.description}</p>
+                </>
+              )
+            })}
+          </div>
+          //map over this.props.weatherData and create a component in main render main component.
         </Container>
         }
       </>
@@ -19,33 +28,3 @@ class Weather extends React.Component {
 }
 
 export default Weather;
-
-// Jumpstart on Lab 08 possible solution
-// class Weather extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       weatherData: {},
-//       displayWeather: false,
-//       error: false,
-//       errorMessage: '',
-//     }
-//   }
-
-//   getWeather = async (event) => {
-//     event.preventDefault();
-//     try {
-//       const weatherURL = `https://us1.locationiq.com/v1/current.json?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.props.location.lat},${this.props.location.lon}&format=json`;
-//       const weatherResponse = await axios.get(weatherURL);
-//       this.setState({
-//         weatherData: weatherResponse.data,
-//         displayWeather: true,
-//       });
-//     } catch (error) {
-//       this.setState({
-//         error: true,
-//         displayWeather: false,
-//       });
-//       this.setState({ errorMessage: error.message });
-//     }
-//   }
