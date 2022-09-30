@@ -59,6 +59,7 @@ class Main extends React.Component {
      
       const API = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
       const weatherRes = await axios.get(API);
+      console.log(weatherRes);
       this.setState({ 
         weatherData: weatherRes.data,
         displayWeather: true, 

@@ -1,8 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-import Footer from './components/Footer';
-import Mainphotos from './Mainphotos'; 
+import Footer from './components/Footer'; 
 import './App.css';
 
 class App extends React.Component {
@@ -11,7 +10,6 @@ class App extends React.Component {
       <>
         <Header />
         <Main />
-        <Mainphotos /> 
         <Footer />
       </>
     );
