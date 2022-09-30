@@ -18,15 +18,16 @@ class CityCard extends React.Component {
             </Alert.Heading>
           </Alert>
         </Container>
+        
         }
         {this.props.displayCard &&
         <Container>
           <Card className="mb-5">
             <Card.Body>
-              <Card.Title>{this.props.location.display_name}</Card.Title>
+              <Card.Title>{this.props.location}</Card.Title>
               <Card.Text>
-              Latitude: {this.props.location.lat} <br />
-                Longitude: {this.props.location.lon}
+              Latitude: {this.props.lat} <br />
+                Longitude: {this.props.lon}
               </Card.Text>
             <Card.Img variant="top" src={this.props.cityMap} />
             </Card.Body>
