@@ -4,6 +4,7 @@ import "../App.css";
 import CityCard from "../components/CityCard";
 import CityForm from "../components/CityForm";
 import Weather from "../components/Weather";
+import Movies from "./Movies";
 // import Movies from "./Movies";
 
 class Main extends React.Component {
@@ -19,6 +20,7 @@ class Main extends React.Component {
       weatherData: [],
       movieData: [],
       displayWeather: false,
+      displayMovies: false,
       lat: "",
       lon: "",
     };
@@ -27,7 +29,7 @@ class Main extends React.Component {
   handleInput = (e) => {
     e.preventDefault();
     this.setState({ searchQuery: e.target.value });
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
 
   handleSearch = async (e) => {
@@ -36,7 +38,7 @@ class Main extends React.Component {
     try {
       const API = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.searchQuery}&format=json`;
       const response = await axios.get(API);
-      
+
       this.setState({
         location: response.data[0].display_name,
         cityMap: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=12`,
@@ -47,7 +49,7 @@ class Main extends React.Component {
       });
       this.handleWeather(response.data[0].lat, response.data[0].lon);
       // console.log(this.state.location);
-      // this.handleMovies();
+      this.handleMovies();
 
       //Error caught here
     } catch (error) {
@@ -57,7 +59,6 @@ class Main extends React.Component {
       });
       this.setState({ errorMessage: error.message });
     }
-    this.handleWeather();
   };
 
   handleWeather = async (lat, lon) => {
@@ -79,14 +80,15 @@ class Main extends React.Component {
       this.setState({ displayCard: false });
       this.setState({
         errorMessage: error.response.status + error.message + "",
-      })
+      });
     }
-  }
+  };
 
   handleMovies = async () => {
     try {
-      const API = `${process.env.REACT_APP_MOVIE_API_KEY}/movies?searchQuery=${this.state.searchQuery}`;
+      const API = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`;
       const movieRes = await axios.get(API);
+      console.log(movieRes);
       this.setState({
         movieData: movieRes.data,
         displayMovies: true,
@@ -96,10 +98,12 @@ class Main extends React.Component {
         error: true,
         displayMovies: false,
       });
-      this.setState({ displayCard: false, });
-      this.setState({ errorMessage: error.response.status + error.message + "" });
+      this.setState({ displayCard: false });
+      this.setState({
+        errorMessage: error.response.status + error.message + "",
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -124,6 +128,10 @@ class Main extends React.Component {
         <Weather
           weatherData={this.state.weatherData}
           displayWeather={this.state.displayWeather}
+        />
+        <Movies
+          movieData={this.state.movieData}
+          displayMovies={this.state.displayMovies}
         />
       </>
     );
