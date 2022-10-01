@@ -24,3 +24,6 @@ yarn-error.log*
 
 # env ALWAYS ADD THIS
 .env
+
+#peacock
+.vscode
