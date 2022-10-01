@@ -64,7 +64,7 @@ class Main extends React.Component {
   handleWeather = async (lat, lon) => {
     try {
       //  console.log(this.state.searchQuery);
-      const API = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}&lat=${lat}&lon=${lon}`;
+      const API = `${process.env.REACT_APP_SERVER_URL}/weather?searchQuery=${this.state.searchQuery}&lat=${lat}&lon=${lon}`;
       const weatherRes = await axios.get(API);
       // console.log(weatherRes);
       this.setState({
@@ -86,7 +86,7 @@ class Main extends React.Component {
 
   handleMovies = async () => {
     try {
-      const API = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`;
+      const API = `${process.env.REACT_APP_SERVER_URL}/movies?searchQuery=${this.state.searchQuery}`;
       const movieRes = await axios.get(API);
       console.log(movieRes);
       this.setState({
